@@ -1,25 +1,56 @@
-# Ember-redirect
+# Ember Redirect
 
-This README outlines the details of collaborating on this Ember addon.
+Ember redirect is an ember addon which allows you to preform regex based redirects within the router.
+This is a perfect solution to "keeping" old links alive while redirecting the user to the new route.
 
-## Installation
+## Installation ##
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `npm install --save-dev ember-redirect`
 
-## Running
+## Usage ##
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+Add the redirect to your `router.js`
 
-## Running Tests
+```js
+import Ember from 'ember';
+import config from './config/environment';
+import redirectRouter from 'ember-redirect/router';
 
-* `ember test`
-* `ember test --server`
+var Router = Ember.Router.extend({
+  location: config.locationType,
+  // This is a basic hash object which
+  // its keys are regexs and its value are route names.
+  // More on this structure below.
+  redirects: {
+    'foo/bar': 'testing',
+    'old/\d+/something'
+  }
+});
 
-## Building
+Router.map(function() {
 
-* `ember build`
+  // Here is the list of all of your active routes and resources
+  this.route('testing');
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+  redirectRouter(this); // This should be at the bottom of the map function
+});
+
+export default Router;
+```
+
+## Redirects Object ##
+
+```js
+var Router = Ember.Router.extend({
+  location: config.locationType,
+  // This is a basic hash object which
+  // its keys are regexs and its value are route names.
+  // More on this structure below.
+  redirects: {
+    'foo/bar': 'testing',
+    'old/\d+/something'
+  }
+});
+```
+
+The redirects object holds a hash map of regexs which will map to 

@@ -1,4 +1,3 @@
 export default function(router) {
-  debugger;
-  router.route('missing', {path: '*path'});
+  router.route('redirect', {path: '*path'});
 }
