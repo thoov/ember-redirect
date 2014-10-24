@@ -4,5 +4,4 @@ export default Ember.Route.extend({
 
   activate: function() {debugger;}
 
-
   });

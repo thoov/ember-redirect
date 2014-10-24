@@ -14,7 +14,7 @@ Router.map(function() {
   this.route('sample', { redirect: 'something' });
   this.route('something');
 
-  this.resource('testing', function() {
+  this.resource('testing', {redirect: 'something'}, function() {
       this.route('foo', { redirect: 'bar' });
 
       this.resource('bar', function() {

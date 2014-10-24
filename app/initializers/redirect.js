@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import routeReopen from 'ember-redirect/utils/route-reopen';
 
 export default {
   name: 'redirect',
@@ -13,27 +14,25 @@ export default {
         this.resourceNameChain.push(routeName);
         var route = this.container.lookup('route:' + this.resourceNameChain.join('.'));
 
-        if(!route) {
-          return;
-        }
-
-        route.reopen({
-            beforeModel: function() {
-              if(options && options.redirect) {
-                this.replaceWith(options.redirect);
-              }
-            }
-        });
+        routeReopen(route, options);
 
         this.resourceNameChain.pop();
       },
       resource: function(resourceName, options, subRoutes) {
 
+        this.resourceNameChain = [resourceName];
+
         if(Ember.typeOf(options) === 'function') {
           subRoutes = options;
         }
+        else if(options.redirect) {
+          var resource = this.container.lookup('route:' + resourceName);
+          routeReopen(resource, options);
 
-        this.resourceNameChain = [resourceName];
+          resource = this.container.lookup('route:' + resourceName + '.index');
+          routeReopen(resource, options);
+        }
+
         subRoutes.call(this);
         this.resourceNameChain = [];
       },
