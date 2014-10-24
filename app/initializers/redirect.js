@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 export default {
   name: 'redirect',
 
@@ -26,9 +28,14 @@ export default {
         this.resourceNameChain.pop();
       },
       resource: function(resourceName, options, subRoutes) {
-        this.resourceNameChain.push(resourceName);
+
+        if(Ember.typeOf(options) === 'function') {
+          subRoutes = options;
+        }
+
+        this.resourceNameChain = [resourceName];
         subRoutes.call(this);
-        this.resourceNameChain.pop();
+        this.resourceNameChain = [];
       },
       container: container
     };

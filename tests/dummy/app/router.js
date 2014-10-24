@@ -10,8 +10,12 @@ Router.map(function() {
   this.route('sample', { redirect: 'something' });
   this.route('something');
 
-  this.resource('testing', {path: 'testing'}, function() {
+  this.resource('testing', function() {
       this.route('foo', { redirect: 'bar' });
+
+      this.resource('bar', function() {
+          this.route('cat', { redirect: 'testing.foo' });
+      });
   });
 
   this.route('bar');
