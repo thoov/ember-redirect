@@ -7,20 +7,22 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 
-  this.route('sample', { redirect: 'something' });
-  this.route('something');
+    this.route('sample', { redirect: 'something' });
+    this.route('something');
 
-  this.resource('testing', {redirect: 'something'}, function() {
-      this.route('foo', { redirect: 'bar' });
+    this.resource('testing', {redirect: 'something'}, function() {
+        this.route('foo', { redirect: 'bar' });
 
-      this.resource('bar', function() {
-          this.route('cat', { redirect: 'testing.foo' });
-      });
-  });
+        this.resource('bar', function() {
+            this.route('cat', { redirect: 'testing.foo' });
+        });
+    });
 
-  this.route('bar');
-  this.route('foo');
+    this.route('bar');
+    this.route('foo');
 
+    this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
+    this.route('user', { path: 'user/:user_id/something/:something' });
 });
 
 export default Router;
