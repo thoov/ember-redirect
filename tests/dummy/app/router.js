@@ -19,6 +19,7 @@ Router.map(function() {
   });
 
   this.route('bar');
+  this.route('foo');
 
 });
 
