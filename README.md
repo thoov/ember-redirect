@@ -1,7 +1,9 @@
 # Ember Redirect
 
-Ember redirect is an ember addon which allows you to preform regex based redirects within the router.
-This is a perfect solution to "keeping" old links alive while redirecting the user to the new route.
+EmberJS Redirect Addon for Ember-CLI (Currently in Alpha). This addon aims to be a simple and easy way to preform route based redirects with minimal effort.
+
+**NOTE**: This is still a work in progress and is "Alpha" quality. Please note that property
+names and methods may change.
 
 ## Installation ##
 
@@ -9,9 +11,11 @@ This is a perfect solution to "keeping" old links alive while redirecting the us
 
 ## Usage ##
 
+Simply place a redirect options within the options argument for either a route or resource such as this:
+
 ```js
 Router.map(function() {
-  this.route('sample', { redirect: 'something' });
+  this.route('sample', { path: 'samplepath', redirect: 'something' });
   this.route('something');
 
   this.resource('testing', {redirect: 'something'}, function() {
@@ -25,3 +29,6 @@ Router.map(function() {
   this.route('bar');
 });
 ```
+
+**Note** Your map function will be called twice during the app's lifetime so if you have any hacks or crazy logic within
+there might be some conflicts.
