@@ -1,6 +1,6 @@
 # Ember Redirect
 
-EmberJS Redirect addon for Ember-CLI (Currently in Alpha). This addon aims to be a simple and easy way to preform route based redirects with minimal effort. The goal is to support legacy links and link-tos which can "redirect" to a new route. 
+EmberJS Redirect addon for Ember-CLI (Currently in Alpha). This addon aims to be a simple and easy way to preform route based redirects with minimal effort. The goal is to support legacy links and link-tos which can "redirect" to a new route.
 
 **NOTE**: This is still a work in progress and is "Alpha" quality. Please note that property
 names and methods may change.
@@ -18,7 +18,7 @@ Router.map(function() {
   this.route('sample', { path: 'samplepath', redirect: 'something' });
   this.route('something');
 
-  this.resource('testing', {redirect: 'something'}, function() {
+  this.resource('testing', { redirect: 'something' }, function() {
       this.route('foo', { redirect: 'bar' });
 
       this.resource('bar', function() {
