@@ -1,9 +1,4 @@
-function swap(array, x, y) {
-  var b = array[x];
-  array[x] = array[y];
-  array[y] = b;
-  return array;
-}
+import arraySwap from './array-swap';
 
 export default function(route, options) {
 
@@ -29,7 +24,7 @@ export default function(route, options) {
                     // This means that we have the same dynamic segment on both this and the next route so we will pair them together.
                     if(dynamicSegmentsOfThisRoute.contains(dynamicSegmentsOfNextRoute[index])) {
                         newDynamicObject[dynamicSegmentsOfNextRoute[index]] = transition.params[thisRouteName][dynamicSegmentsOfNextRoute[index]];
-                        dynamicSegmentsOfThisRoute = swap(dynamicSegmentsOfThisRoute, index, dynamicSegmentsOfThisRoute.indexOf(dynamicSegmentsOfNextRoute[index]));
+                        dynamicSegmentsOfThisRoute = arraySwap(dynamicSegmentsOfThisRoute, index, dynamicSegmentsOfThisRoute.indexOf(dynamicSegmentsOfNextRoute[index]));
                     }
                     else {
                         newDynamicObject[dynamicSegmentsOfNextRoute[index]] = transition.params[thisRouteName][dynamicSegmentsOfThisRoute[index]];

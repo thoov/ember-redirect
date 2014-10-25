@@ -31,8 +31,38 @@ Router.map(function() {
 
     this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
     this.route('user', { path: 'user/:user_id/something/:something' });
+    this.route('profile', { path: 'profile/:profile_id/user/:user_id', redirect: 'user' });
 });
 ```
 
 **Note** Your map function will be called twice during the app's lifetime so if you have any hacks or crazy logic within
 there might be some conflicts.
+
+## Dynamic Routes ##
+
+Dynamic routes are supported and follow two rules:
+
+The first is that if you are redirecting from one route to another and they share a common
+dynamic segment then those are preserved. As an example we have the following routes:
+
+```js
+this.route('profile', { path: 'profile/:profile_id/user/:user_id', redirect: 'user' });
+this.route('user', { path: 'user/:user_id/something/:something' });
+```
+
+Our profile url would be something like this: `/profile/1/user/13` and would redirect to
+the user route of: `/user/13/something/1`. You can see in this example that both routes
+share the same :user_id segment and those are mapped together.
+
+The next rule is that once all shared dynamic segments are matched (or there are none) then
+we simple fall back to doing a 1:1 match. As an example:
+
+```js
+this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
+this.route('user', { path: 'user/:user_id/something/:something' });
+```
+
+Our account url would be something of this form: `/account/34/other/17` and would
+redirect to the user route of: `/user/34/something/17`. As you can see there are no
+shared dynamic segments so we just perform a 1:1 mapping where the first segment in account
+maps to the first segment in user.
