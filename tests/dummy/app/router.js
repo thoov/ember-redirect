@@ -23,6 +23,7 @@ Router.map(function() {
 
     this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
     this.route('user', { path: 'user/:user_id/something/:something' });
+    this.route('profile', { path: 'profile/:profile_id/user/:user_id', redirect: 'user' });
 });
 
 export default Router;
