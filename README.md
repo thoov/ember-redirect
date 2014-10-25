@@ -52,7 +52,7 @@ this.route('user', { path: 'user/:user_id/something/:something' });
 
 Our profile url would be something like this: `/profile/1/user/13` and would redirect to
 the user route of: `/user/13/something/1`. You can see in this example that both routes
-share the same :user_id segment and those are mapped together.
+share the same `:user_id` segment and those are mapped together.
 
 The next rule is that once all shared dynamic segments are matched (or there are none) then
 we simple fall back to doing a 1:1 match. As an example:
