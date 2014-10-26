@@ -4,7 +4,7 @@ import startApp from '../helpers/start-app';
 
 var App;
 
-module('Simple redirect integration test', {
+module('Simple routes will redirect - Integration', {
 	setup: function() {
 		App = startApp();
 	},
