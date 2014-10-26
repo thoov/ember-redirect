@@ -1,8 +1,4 @@
 import sampleRoute from './sample';
 
 
-export default sampleRoute.extend({
-    activate: function() {
-        debugger;
-    }
-});
+export default sampleRoute.extend({});

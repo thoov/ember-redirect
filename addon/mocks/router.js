@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import routeReopen from '../utils/route-reopen';
 
 var mockRouter = {
@@ -37,4 +38,4 @@ var mockRouter = {
 export default function(container) {
     mockRouter.container = container;
     return mockRouter;
-};
+}
