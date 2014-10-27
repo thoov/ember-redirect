@@ -12,9 +12,11 @@ Router.map(function() {
 
     this.resource('testing', {redirect: 'something'}, function() {
         this.route('foo', { redirect: 'bar' });
+        this.route('hello');
 
         this.resource('bar', function() {
             this.route('cat', { redirect: 'testing.foo' });
+            this.route('world', { redirect: 'testing.hello' });
         });
     });
 
