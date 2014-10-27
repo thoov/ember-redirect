@@ -5,6 +5,8 @@ EmberJS Redirect addon for Ember-CLI (Currently in Alpha). This addon aims to be
 **NOTE**: This is still a work in progress and is "Alpha" quality. Please note that property
 names and methods may change.
 
+[![Build Status](https://travis-ci.org/thoov/ember-redirect.svg?branch=master)](https://travis-ci.org/thoov/ember-redirect)
+
 ## Installation ##
 
 * `npm install --save-dev ember-redirect`
