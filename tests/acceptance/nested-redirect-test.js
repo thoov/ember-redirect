@@ -35,3 +35,16 @@ test('Testing.bar route will redirect to the something route', function() {
 		strictEqual(appController.get('currentRouteName'), 'bar', 'Bar.cat will redirect to the correct route');
 	});
 });
+
+test('Testing.bar route will not redirect', function() {
+	expect(3);
+
+	visit('/testing/bar').then(function() {
+		var appController = App.__container__.lookup('controller:application');
+		var appRouter = App.__container__.lookup('route:application');
+
+		strictEqual(appController.get('currentPath'), 'testing.bar.index', 'Bar.cat will redirect to the correct path');
+		strictEqual(appController.get('currentRouteName'), 'bar.index', 'Bar.cat will redirect to the correct route');
+		strictEqual(appRouter.router.location.path, '/testing/bar', 'Bar.cat will redirect to the correct route');
+	});
+});

@@ -14,12 +14,28 @@ module('Dynamic segments will redirect - Integration', {
 });
 
 test('Account route will redirect to the user route', function() {
-	expect(2);
+	expect(3);
 
 	visit('/account/13/other/76').then(function() {
 		var appController = App.__container__.lookup('controller:application');
+		var appRouter = App.__container__.lookup('route:application');
 
 		strictEqual(appController.get('currentPath'), 'user', 'Account will redirect to the correct user path');
 		strictEqual(appController.get('currentRouteName'), 'user', 'Account will redirect to the correct user route');
+		strictEqual(appRouter.router.location.path, '/user/13/something/76', 'Bar.cat will redirect to the correct route');
+	});
+});
+
+
+test('Account route will redirect to the user route', function() {
+	expect(3);
+
+	visit('/profile/14/user/66').then(function() {
+		var appController = App.__container__.lookup('controller:application');
+		var appRouter = App.__container__.lookup('route:application');
+
+		strictEqual(appController.get('currentPath'), 'user', 'Account will redirect to the correct user path');
+		strictEqual(appController.get('currentRouteName'), 'user', 'Account will redirect to the correct user route');
+		strictEqual(appRouter.router.location.path, '/user/66/something/14', 'Bar.cat will redirect to the correct route');
 	});
 });
