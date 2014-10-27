@@ -1,5 +1,6 @@
 import arraySwap from './array-swap';
 
+
 export default function(route, options) {
 
     if(!route || !options || !options.redirect) {
@@ -42,4 +43,6 @@ export default function(route, options) {
             this._super.apply(this, arguments);
         }
     });
+
+    return route;
 }
