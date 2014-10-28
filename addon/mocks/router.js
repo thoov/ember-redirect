@@ -7,6 +7,9 @@ import reopenRoute from '../utils/route-reopen';
     then we look for the redirect property within the options object.
 */
 var mockRouter = {
+    container: null,
+    application: null,
+
     /*
         This array holds names of parent resources. For example: the foo resource which has bar as a sub route
         would look like: ['foo', 'bar']
@@ -22,7 +25,8 @@ var mockRouter = {
         routeObject = this.container.lookup(routeConatinerKey);
 
         // if the routeObject does not exist then we need to generate a basic route in its place
-        if(!routeObject) {
+        // we will only do this if there is a redirect option
+        if(!routeObject && options && options.redirect) {
             basicRoute = this.container.lookup('route:basic');
             this.application.register(routeConatinerKey, basicRoute);
             routeObject = this.container.lookup(routeConatinerKey);
@@ -50,9 +54,7 @@ var mockRouter = {
 
         subRoutes.call(this);
         this.resourceNameChain = [];
-    },
-    container: null,
-    application: null
+    }
 };
 
 

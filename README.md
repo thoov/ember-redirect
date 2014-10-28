@@ -68,3 +68,9 @@ Our account url would be something of this form: `/account/34/other/17` and woul
 redirect to the user route of: `/user/34/something/17`. As you can see there are no
 shared dynamic segments so we just perform a 1:1 mapping where the first segment in account
 maps to the first segment in user.
+
+## Generated Routes ##
+
+If you have a route defined inside of you router map but do not create the route Ember behind the scene will generate a "basic" route
+for you. This addon will instead generate the route and then apply its magic to the newly generated route. After it does
+that, it will register the route onto the app.
