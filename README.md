@@ -14,7 +14,7 @@ EmberJS Redirect addon for Ember-CLI. This addon aims to be a simple and easy wa
 
 There are 2 ways in which you can define your redirects:
 
-#### The first is to simply place a redirect property within the options argument on either a route or resource such as this:
+The first is to simply place a redirect property within the options argument on either a route or resource such as this:
 
 ```js
 Router.map(function() {
@@ -41,7 +41,7 @@ Router.map(function() {
 **Note**: Your map function will be called twice during the app's lifetime so if you have any hacks or crazy logic within
 there might be some conflicts. **If you feel like your router's map function might conflict then use the following example**.
 
-#### The second (safe way) is to place a redirects property on the router object itself. 
+The second (safe way) is to place a redirects property on the router object itself.
 **NOTE: Adding a redirects property to your router object will take priority over adding redirect properties to the individual route options. Therefore, do not mix and match. Place
 all redirects in either the redirects property on the router object or all of them in the routes themselves.**
 
