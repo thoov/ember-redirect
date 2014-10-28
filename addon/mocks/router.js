@@ -16,47 +16,28 @@ var mockRouter = {
     */
     resourceNameChain: [],
     route: function(routeName, options) {
-        var routeObject,
-            basicRoute,
-            routeConatinerKey;
-
         this.resourceNameChain.push(routeName);
-        routeConatinerKey = 'route:' + this.resourceNameChain.join('.');
-        routeObject = this.container.lookup(routeConatinerKey);
-
-        // if the routeObject does not exist then we need to generate a basic route in its place
-        // we will only do this if there is a redirect option
-        if(!routeObject && options && options.redirect) {
-            basicRoute = this.container.lookup('route:basic');
-            this.application.register(routeConatinerKey, basicRoute);
-            routeObject = this.container.lookup(routeConatinerKey);
-        }
-
-        reopenRoute(routeObject, options);
+        this.addRedirectToRoute(this.resourceNameChain.join('.'), options);
         this.resourceNameChain.pop();
     },
     resource: function(resourceName, options, subRoutes) {
-        var defaultResourceObject,
-            indexResourceObject;
-
         this.resourceNameChain = [resourceName];
 
         if(Ember.typeOf(options) === 'function') {
             subRoutes = options;
         }
         else if(options.redirect) {
-            defaultResourceObject = this.container.lookup('route:' + resourceName);
-            indexResourceObject = this.container.lookup('route:' + resourceName + '.index');
-
-            reopenRoute(defaultResourceObject, options);
-            reopenRoute(indexResourceObject, options);
+            this.addRedirectToRoute(resourceName, options); // TODO: not sure if this is needed
+            this.addRedirectToRoute(resourceName + '.index', options);
         }
 
         subRoutes.call(this);
         this.resourceNameChain = [];
+    },
+    addRedirectToRoute: function(routeName, options) {
+        return reopenRoute(routeName, options, this.container, this.application);
     }
 };
-
 
 export default function(container, application) {
     mockRouter.container = container;

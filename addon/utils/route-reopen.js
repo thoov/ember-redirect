@@ -1,13 +1,23 @@
 import arraySwap from './array-swap';
 
+export default function(routeName, options, container, application) {
 
-export default function(route, options) {
-
-    if(!route || !options || !options.redirect) {
+    if(!routeName || !options || !options.redirect) {
         return;
     }
 
-    route.reopen({
+    var routeContainerKey = 'route:' + routeName,
+        routeObject = container.lookup(routeContainerKey),
+        basicRoute;
+
+    // if the routeObject does not exist then we need to generate a basic route in its place
+    if(!routeObject) {
+        basicRoute = container.lookup('route:basic');
+        application.register(routeContainerKey, basicRoute);
+        routeObject = container.lookup(routeContainerKey);
+    }
+
+    routeObject.reopen({
         beforeModel: function(transition) {
             var newDynamicObject = {},
                 thisRouteName = this.routeName,
@@ -44,5 +54,5 @@ export default function(route, options) {
         }
     });
 
-    return route;
+    return routeObject;
 }
