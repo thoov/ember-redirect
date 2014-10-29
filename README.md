@@ -62,8 +62,8 @@ redirects: {
 
 ...
 
-this.route('profile', { path: 'profile/:profile_id/user/:user_id' });
 this.route('user', { path: 'user/:user_id/something/:something' });
+this.route('profile', { path: 'profile/:profile_id/user/:user_id' });
 ```
 
 Our profile url would be something like this: `/profile/1/user/13` and would redirect to
@@ -80,8 +80,8 @@ redirects: {
 
 ...
 
-this.route('account', { path: 'account/:account_id/other/:other_id' });
 this.route('user', { path: 'user/:user_id/something/:something' });
+this.route('account', { path: 'account/:account_id/other/:other_id' });
 ```
 
 Our account url would be something of this form: `/account/34/other/17` and would
