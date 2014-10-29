@@ -49,6 +49,9 @@ Router.map(function() {
 });
 ```
 
+**Note**: In previous versions you used to be able to define redirects on the actual route/resource definitions like this:
+`this.route('foo', { redirect: 'bar' });`. This has been removed and you will need to move over to the above usage.
+
 ## Dynamic Routes ##
 
 Dynamic routes are supported and follow two rules:
