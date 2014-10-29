@@ -1,4 +1,4 @@
-import arraySwap from './array-swap';
+import arraySwap from './utils/array-swap';
 
 export default function(routeName, options, container, application) {
 
