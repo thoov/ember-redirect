@@ -57,8 +57,6 @@ The first is that if you are redirecting from one route to another and they shar
 dynamic segment then those are preserved. As an example we have the following routes:
 
 ```js
-...
-
 redirects: {
   'profile' : 'user'
 }
@@ -77,8 +75,6 @@ The next rule is that once all shared dynamic segments are matched (or there are
 we simple fall back to doing a 1:1 match. As an example:
 
 ```js
-...
-
 redirects: {
   'account' : 'user'
 }
@@ -99,3 +95,15 @@ maps to the first segment in user.
 If you have a route defined inside of you router map but do not create the route Ember behind the scene will generate a "basic" route
 for you. This addon will instead generate the route and then apply its magic to the newly generated route. After it does
 that, it will register the route onto the app.
+
+## Running tests ##
+
+* `git clone git@github.com:thoov/ember-redirect.git`
+* `cd ember-redirect`
+* `npm install`
+* `ember test` or visit [localhost tests](http://localhost:4200/tests)
+* Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
+
+## Feedback or issues ##
+
+If you have any feedback, encounter any bugs, or just have a question, please feel free to create a [github issue](https://github.com/thoov/ember-redirect/issues/new) or send me a tweet at [@thoov](https://twitter.com/thoov).
