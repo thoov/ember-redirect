@@ -101,7 +101,8 @@ that, it will register the route onto the app.
 * `git clone git@github.com:thoov/ember-redirect.git`
 * `cd ember-redirect`
 * `npm install`
-* `ember test` or visit [localhost tests](http://localhost:4200/tests)
+* `ember t`
+  * Or `ember s` then visit [localhost tests](http://localhost:4200/tests)
 * Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
 
 ## Feedback or issues ##
