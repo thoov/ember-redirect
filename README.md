@@ -21,14 +21,13 @@ var Router = Ember.Router.extend({
     'testing.index' : 'something',
     'testing.foo'   : 'bar',
     'bar.cat'       : 'testing.foo',
-    'bar.world'     : 'testing.hello',
     'account'       : 'user',
-    'profile'       : 'user',
-    'login'         : 'foo'
+    'profile'       : 'user'
   }
 });
 
 Router.map(function() {
+    this.route('bar');
     this.route('sample'); // will redirect to something
     this.route('something');
 
@@ -40,12 +39,9 @@ Router.map(function() {
         });
     });
 
-    this.route('bar');
-    this.route('foo');
-
-    this.route('account', { path: 'account/:account_id/other/:other_id'); // will redirect to user
     this.route('user', { path: 'user/:user_id/something/:something' });
-    this.route('profile', { path: 'profile/:profile_id/user/:user_id'); // will redirect to user
+    this.route('profile', { path: 'profile/:profile_id/user/:user_id' }); // will redirect to user
+    this.route('account', { path: 'account/:account_id/other/:other_id' }); // will redirect to user
 });
 ```
 
