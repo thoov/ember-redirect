@@ -12,39 +12,6 @@ EmberJS Redirect addon for Ember-CLI. This addon aims to be a simple and easy wa
 
 ## Usage ##
 
-There are 2 ways in which you can define your redirects:
-
-The first is to simply place a redirect property within the options argument on either a route or resource such as this:
-
-```js
-Router.map(function() {
-    this.route('sample', { redirect: 'something' });
-    this.route('something');
-
-    this.resource('testing', {redirect: 'something'}, function() {
-        this.route('foo', { redirect: 'bar' });
-
-        this.resource('bar', function() {
-            this.route('cat', { redirect: 'testing.foo' });
-        });
-    });
-
-    this.route('bar');
-    this.route('foo');
-
-    this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
-    this.route('user', { path: 'user/:user_id/something/:something' });
-    this.route('profile', { path: 'profile/:profile_id/user/:user_id', redirect: 'user' });
-});
-```
-
-**Note**: Your map function will be called twice during the app's lifetime so if you have any hacks or crazy logic within
-there might be some conflicts. **If you feel like your router's map function might conflict then use the following example**.
-
-The second (safe way) is to place a redirects property on the router object itself.
-**NOTE: Adding a redirects property to your router object will take priority over adding redirect properties to the individual route options. Therefore, do not mix and match. Place
-all redirects in either the redirects property on the router object or all of them in the routes themselves.**
-
 ```js
 var Router = Ember.Router.extend({
   location: config.locationType,
@@ -60,10 +27,27 @@ var Router = Ember.Router.extend({
     'login'         : 'foo'
   }
 });
-```
 
-**Note** These 2 examples are equivalent except this option does not invoke the routers map function a second time. Because
-of this, this option is considered the "safe" option.
+Router.map(function() {
+    this.route('sample'); // will redirect to something
+    this.route('something');
+
+    this.resource('testing', function() { // will redirect to something
+        this.route('foo'); // will redirect to bar
+
+        this.resource('bar', function() {
+            this.route('cat'); // will redirect to testing.foo
+        });
+    });
+
+    this.route('bar');
+    this.route('foo');
+
+    this.route('account', { path: 'account/:account_id/other/:other_id'); // will redirect to user
+    this.route('user', { path: 'user/:user_id/something/:something' });
+    this.route('profile', { path: 'profile/:profile_id/user/:user_id'); // will redirect to user
+});
+```
 
 ## Dynamic Routes ##
 
@@ -73,7 +57,13 @@ The first is that if you are redirecting from one route to another and they shar
 dynamic segment then those are preserved. As an example we have the following routes:
 
 ```js
-this.route('profile', { path: 'profile/:profile_id/user/:user_id', redirect: 'user' });
+redirects: {
+  'profile' : 'user'
+}
+
+...
+
+this.route('profile', { path: 'profile/:profile_id/user/:user_id' });
 this.route('user', { path: 'user/:user_id/something/:something' });
 ```
 
@@ -85,7 +75,13 @@ The next rule is that once all shared dynamic segments are matched (or there are
 we simple fall back to doing a 1:1 match. As an example:
 
 ```js
-this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
+redirects: {
+  'account' : 'user'
+}
+
+...
+
+this.route('account', { path: 'account/:account_id/other/:other_id' });
 this.route('user', { path: 'user/:user_id/something/:something' });
 ```
 
@@ -99,3 +95,16 @@ maps to the first segment in user.
 If you have a route defined inside of you router map but do not create the route Ember behind the scene will generate a "basic" route
 for you. This addon will instead generate the route and then apply its magic to the newly generated route. After it does
 that, it will register the route onto the app.
+
+## Running tests ##
+
+* `git clone git@github.com:thoov/ember-redirect.git`
+* `cd ember-redirect`
+* `npm install`
+* `ember t`
+  * Or `ember s` then visit [localhost tests](http://localhost:4200/tests)
+* Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
+
+## Feedback or issues ##
+
+If you have any feedback, encounter any bugs, or just have a question, please feel free to create a [github issue](https://github.com/thoov/ember-redirect/issues/new) or send me a tweet at [@thoov](https://twitter.com/thoov).

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from './config/environment';
 
 var Router = Ember.Router.extend({
-  location: config.locationType /*,
+  location: config.locationType,
   redirects: {
     'sample'        : 'something',
     'testing.index' : 'something',
@@ -12,32 +12,32 @@ var Router = Ember.Router.extend({
     'account'       : 'user',
     'profile'       : 'user',
     'login'         : 'foo'
-  }*/
+  }
 });
 
 Router.map(function() {
 
-    this.route('sample', { redirect: 'something' });
+    this.route('sample');
     this.route('something');
 
-    this.resource('testing', {redirect: 'something'}, function() {
-        this.route('foo', { redirect: 'bar' });
+    this.resource('testing', function() {
+        this.route('foo');
         this.route('hello');
 
         this.resource('bar', function() {
-            this.route('cat', { redirect: 'testing.foo' });
-            this.route('world', { redirect: 'testing.hello' });
+            this.route('cat');
+            this.route('world');
         });
     });
 
     this.route('bar');
     this.route('foo');
 
-    this.route('account', { path: 'account/:account_id/other/:other_id', redirect: 'user' });
+    this.route('account', { path: 'account/:account_id/other/:other_id' });
     this.route('user', { path: 'user/:user_id/something/:something' });
-    this.route('profile', { path: 'profile/:profile_id/user/:user_id', redirect: 'user' });
+    this.route('profile', { path: 'profile/:profile_id/user/:user_id' });
 
-    this.route('login', { redirect: 'foo' });
+    this.route('login');
 });
 
 export default Router;
