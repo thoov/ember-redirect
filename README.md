@@ -92,7 +92,7 @@ maps to the first segment in user.
 
 ## Generated Routes ##
 
-If you have a route defined inside of you router map but do not create the route Ember behind the scene will generate a "basic" route
+If you have a route defined inside of your router map but do not create the route Ember behind the scene will generate a "basic" route
 for you. This addon will instead generate the route and then apply its magic to the newly generated route. After it does
 that, it will register the route onto the app.
 
@@ -102,7 +102,7 @@ that, it will register the route onto the app.
 * `cd ember-redirect`
 * `npm install`
 * `ember t`
-  * Or `ember s` then visit [localhost tests](http://localhost:4200/tests)
+  * or `ember s` then visit [localhost tests](http://localhost:4200/tests)
 * Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
 
 ## Feedback or issues ##
