@@ -3,7 +3,7 @@ import arraySwap from './utils/array-swap';
 
 export default function(routeName, options, container, application) {
 
-    if(!routeName || !options || !options.redirect) {
+    if(!routeName || !options || !options.redirect || !container || !application) {
         return;
     }
 
