@@ -1,6 +1,6 @@
-export default function (array, x, y) {
-	var b = array[x];
-	array[x] = array[y];
-	array[y] = b;
-	return array;
+export default function (originalArray, x, y) {
+	var tempArray = originalArray[x];
+	originalArray[x] = originalArray[y];
+	originalArray[y] = tempArray;
+	return originalArray;
 }

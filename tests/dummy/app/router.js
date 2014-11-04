@@ -19,6 +19,7 @@ Router.map(function() {
 
     this.route('sample');
     this.route('something');
+    this.route('dog')   ;
 
     this.resource('testing', function() {
         this.route('foo');
