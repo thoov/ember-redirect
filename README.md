@@ -102,6 +102,6 @@ that, it will register the route onto the app.
   * or `ember s` then visit [localhost tests](http://localhost:4200/tests)
 * Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
 
-## Feedback or issues ##
+## Feedback or Issues ##
 
 If you have any feedback, encounter any bugs, or just have a question, please feel free to create a [github issue](https://github.com/thoov/ember-redirect/issues/new) or send me a tweet at [@thoov](https://twitter.com/thoov).
