@@ -6,7 +6,7 @@ EmberJS Redirect addon for Ember-CLI. This addon aims to be a simple and easy wa
 
 ## Installation ##
 
-* `npm install --save-dev ember-redirect`
+`ember install:addon ember-redirect`
 
 ## Usage ##
 
