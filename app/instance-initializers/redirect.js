@@ -4,15 +4,17 @@ import reopenRoute from 'ember-redirect/reopen-route';
 export default {
   name: 'redirect',
 
-  initialize: function(container, application) {
-    var router     = container.lookup('router:main');
+  initialize: function(instance) {
+    var router     = instance.container.lookup('router:main');
     var routeNames = (router && router.redirects) ? Ember.keys(router.redirects) : [];
+
+		debugger;
 
     // The user has specified the redirects on the router object instead of the map function
     // so we should use those instead of invoking the map function
     if(router.redirects && routeNames.length > 0) {
       Ember.EnumerableUtils.forEach(routeNames, function(routeName) {
-        reopenRoute(routeName, { redirect: router.redirects[routeName] }, container, application);
+        reopenRoute(routeName, { redirect: router.redirects[routeName] }, instance);
       });
     }
   }

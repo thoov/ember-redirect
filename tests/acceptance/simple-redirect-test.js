@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { test } from 'ember-qunit';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 
 var App, container, lookupFunc;
@@ -15,65 +15,55 @@ module('Simple routes will redirect - Integration', {
   }
 });
 
-test('the base case where not specifing a redirect will not redirect', function() {
-  expect(6);
+test('the base case where not specifing a redirect will not redirect', function(assert) {
+  assert.expect(4);
 
   visit('/something').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
     var appRoute      = lookupFunc.call(container, 'route:application');
-    var locationPath  = appRoute.router.location.path;
 
-    strictEqual(appController.get('currentPath'), 'something', 'Something route will not redirect and stay on the correct path');
-    strictEqual(appController.get('currentRouteName'), 'something', 'Something route will not redirect and stay on the correct route');
-    strictEqual(locationPath, '/something', 'Something will not redirect and stay on the correct url location');
+    assert.strictEqual(appController.get('currentPath'), 'something', 'Something route will not redirect and stay on the correct path');
+    assert.strictEqual(appController.get('currentRouteName'), 'something', 'Something route will not redirect and stay on the correct route');
   });
 
   visit('/testing/bar').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
     var appRoute      = lookupFunc.call(container, 'route:application');
-    var locationPath  = appRoute.router.location.path;
 
-    strictEqual(appController.get('currentPath'), 'testing.bar.index', 'Something route will not redirect and stay on the correct path');
-    strictEqual(appController.get('currentRouteName'), 'bar.index', 'Something route will not redirect and stay on the correct route');
-    strictEqual(locationPath, '/testing/bar', 'Something will not redirect and stay on the correct url location');
+    assert.strictEqual(appController.get('currentPath'), 'testing.bar.index', 'Something route will not redirect and stay on the correct path');
+    assert.strictEqual(appController.get('currentRouteName'), 'bar.index', 'Something route will not redirect and stay on the correct route');
   });
 });
 
-test('basic route to route redirects are performed correctly', function() {
-  expect(6);
+test('basic route to route redirects are performed correctly', function(assert) {
+  assert.expect(4);
 
   visit('/sample').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
     var appRoute      = lookupFunc.call(container, 'route:application');
-    var locationPath  = appRoute.router.location.path;
 
-    strictEqual(appController.get('currentPath'), 'something', 'Sample route will redirect to the correct path');
-    strictEqual(appController.get('currentRouteName'), 'something', 'Sample route will redirect to the correct route');
-    strictEqual(locationPath, '/something', 'Sample will redirect to the correct url location');
+    assert.strictEqual(appController.get('currentPath'), 'something', 'Sample route will redirect to the correct path');
+    assert.strictEqual(appController.get('currentRouteName'), 'something', 'Sample route will redirect to the correct route');
   });
 
   visit('/login').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
     var appRoute      = lookupFunc.call(container, 'route:application');
-    var locationPath  = appRoute.router.location.path;
 
-    strictEqual(appController.get('currentPath'), 'foo', 'Login route will redirect to the correct path');
-    strictEqual(appController.get('currentRouteName'), 'foo', 'Login route will redirect to the correct route');
-    strictEqual(locationPath, '/foo', 'Login will redirect to the correct url location');
+    assert.strictEqual(appController.get('currentPath'), 'foo', 'Login route will redirect to the correct path');
+    assert.strictEqual(appController.get('currentRouteName'), 'foo', 'Login route will redirect to the correct route');
   });
 });
 
 
-test('basic resource to route redirects are performed correctly', function() {
-  expect(3);
+test('basic resource to route redirects are performed correctly', function(assert) {
+  assert.expect(2);
 
   visit('/testing').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
     var appRoute      = lookupFunc.call(container, 'route:application');
-    var locationPath  = appRoute.router.location.path;
 
-    strictEqual(appController.get('currentPath'), 'something', 'Testing resource will redirect to the correct path');
-    strictEqual(appController.get('currentRouteName'), 'something', 'Testing resource will redirect to the correct route');
-    strictEqual(locationPath, '/something', 'Testing resource will redirect to the correct url location');
+    assert.strictEqual(appController.get('currentPath'), 'something', 'Testing resource will redirect to the correct path');
+    assert.strictEqual(appController.get('currentRouteName'), 'something', 'Testing resource will redirect to the correct route');
   });
 });
