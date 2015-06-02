@@ -38,7 +38,7 @@
     "ember-addon",
     "ember",
     "emberjs",
-    "ember redirect"
+    "ember redirect",
     "redirect"
   ],
   "dependencies": {
