@@ -8,8 +8,6 @@ export default {
     var router     = instance.container.lookup('router:main');
     var routeNames = (router && router.redirects) ? Ember.keys(router.redirects) : [];
 
-		debugger;
-
     // The user has specified the redirects on the router object instead of the map function
     // so we should use those instead of invoking the map function
     if(router.redirects && routeNames.length > 0) {
