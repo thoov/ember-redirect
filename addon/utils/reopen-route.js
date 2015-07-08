@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import arraySwap from './utils/array-swap';
+import arraySwap from 'ember-redirect/utils/array-swap';
 
 const filter  = Ember.EnumerableUtils.filter;
 const map     = Ember.EnumerableUtils.map;

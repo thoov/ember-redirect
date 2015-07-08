@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import reopenRoute from 'ember-redirect/reopen-route';
+import reopenRoute from 'ember-redirect/utils/reopen-route';
 
 export default {
   name: 'redirect',
