@@ -9,6 +9,11 @@ export default function(routeName, options, instance) {
   var routeContainerKey = `route:${routeName}`;
   var routeObject       = instance.container.lookup(routeContainerKey);
 
+  if (!routeObject) {
+    routeObject = Ember.Route.extend({});
+    instance.registry.register(routeContainerKey, routeObject, { singleton: false });
+  }
+
   Ember.assert(`Could not find a route named: ${routeName}`, routeObject);
 
   routeObject.reopen({

@@ -11,7 +11,8 @@ var Router = Ember.Router.extend({
     'bar.world'     : 'testing.hello',
     'account'       : 'user',
     'profile'       : 'user',
-    'login'         : 'foo'
+    'login'         : 'foo',
+    'generated'     : 'foo'
   }
 });
 
@@ -39,6 +40,7 @@ Router.map(function() {
   this.route('profile', { path: 'profile/:profile_id/user/:user_id' });
 
   this.route('login');
+  this.route('generated');
 });
 
 export default Router;

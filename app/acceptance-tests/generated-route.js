@@ -1,0 +1,1 @@
+export { default } from 'ember-redirect/acceptance-tests/generated-route';
