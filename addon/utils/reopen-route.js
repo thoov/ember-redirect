@@ -1,10 +1,6 @@
 import Ember from 'ember';
 import arraySwap from 'ember-redirect/utils/array-swap';
 
-const filter  = Ember.EnumerableUtils.filter;
-const map     = Ember.EnumerableUtils.map;
-const forEach = Ember.EnumerableUtils.forEach;
-
 export default function(routeName, options, instance) {
   var routeContainerKey = `route:${routeName}`;
   var routeObject       = instance.container.lookup(routeContainerKey);
@@ -21,8 +17,8 @@ export default function(routeName, options, instance) {
       var newDynObject       = {};
       var thisRouteName      = this.routeName;
       var routeNames         = this.router.router.recognizer.names;
-      var dynSegsOfNextRoute = map(filter(routeNames[options.redirect].segments, item => item.name), item => item.name);
-      var dynSegsOfThisRoute = map(filter(routeNames[thisRouteName].segments, item => item.name), item => item.name);
+      var dynSegsOfNextRoute = routeNames[options.redirect].segments.filter(item => item.name).map(item => item.name);
+      var dynSegsOfThisRoute = routeNames[thisRouteName].segments.filter(item => item.name).map(item => item.name);
 
       // Make sure we only try to make a redirect at the most nested
       // route and not a parent resource.
@@ -34,7 +30,7 @@ export default function(routeName, options, instance) {
       // segments then we can supply.
       if(dynSegsOfNextRoute.length <= dynSegsOfThisRoute.length) {
 
-        forEach(dynSegsOfNextRoute, function(item, index) {
+        dynSegsOfNextRoute.forEach(function(item, index) {
           // This means that we have the same dynamic segment on both this and the next route so we will pair them together.
           if(dynSegsOfThisRoute.indexOf(dynSegsOfNextRoute[index]) !== -1) {
             newDynObject[dynSegsOfNextRoute[index]] = transition.params[thisRouteName][dynSegsOfNextRoute[index]];
