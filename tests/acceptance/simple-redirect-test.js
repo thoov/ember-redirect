@@ -20,7 +20,6 @@ test('the base case where not specifing a redirect will not redirect', function(
 
   visit('/something').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
-    var appRoute      = lookupFunc.call(container, 'route:application');
 
     assert.strictEqual(appController.get('currentPath'), 'something', 'Something route will not redirect and stay on the correct path');
     assert.strictEqual(appController.get('currentRouteName'), 'something', 'Something route will not redirect and stay on the correct route');
@@ -28,7 +27,6 @@ test('the base case where not specifing a redirect will not redirect', function(
 
   visit('/testing/bar').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
-    var appRoute      = lookupFunc.call(container, 'route:application');
 
     assert.strictEqual(appController.get('currentPath'), 'testing.bar.index', 'Something route will not redirect and stay on the correct path');
     assert.strictEqual(appController.get('currentRouteName'), 'bar.index', 'Something route will not redirect and stay on the correct route');
@@ -40,7 +38,6 @@ test('basic route to route redirects are performed correctly', function(assert) 
 
   visit('/sample').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
-    var appRoute      = lookupFunc.call(container, 'route:application');
 
     assert.strictEqual(appController.get('currentPath'), 'something', 'Sample route will redirect to the correct path');
     assert.strictEqual(appController.get('currentRouteName'), 'something', 'Sample route will redirect to the correct route');
@@ -48,7 +45,6 @@ test('basic route to route redirects are performed correctly', function(assert) 
 
   visit('/login').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
-    var appRoute      = lookupFunc.call(container, 'route:application');
 
     assert.strictEqual(appController.get('currentPath'), 'foo', 'Login route will redirect to the correct path');
     assert.strictEqual(appController.get('currentRouteName'), 'foo', 'Login route will redirect to the correct route');
@@ -61,7 +57,6 @@ test('basic resource to route redirects are performed correctly', function(asser
 
   visit('/testing').then(function() {
     var appController = lookupFunc.call(container, 'controller:application');
-    var appRoute      = lookupFunc.call(container, 'route:application');
 
     assert.strictEqual(appController.get('currentPath'), 'something', 'Testing resource will redirect to the correct path');
     assert.strictEqual(appController.get('currentRouteName'), 'something', 'Testing resource will redirect to the correct route');
