@@ -44,7 +44,7 @@ export default function(routeName, options, instance) {
         this.replaceWith(transition.router.recognizer.generate(options.redirect, newDynObject));
       }
 
-      this._super.apply(this, arguments);
+      return this._super.apply(this, arguments);
     }
   });
 
