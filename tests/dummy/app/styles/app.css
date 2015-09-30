@@ -1,3 +1,20 @@
 html, body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   margin: 20px;
+}
+
+#title,
+p {
+  text-align: center;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px;
 }

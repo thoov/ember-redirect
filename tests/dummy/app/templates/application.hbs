@@ -1,3 +1,15 @@
-<h2 id="title">Welcome to Ember.js</h2>
+<h2 id="title"><a href="https://github.com/thoov/ember-redirect" target="_blank">Ember-Redirect Demo</a></h2>
+
+<div class="header">
+  {{#link-to 'index'}}<button>Home</button>{{/link-to}}
+  {{#link-to 'sample'}}<button>sample -> something</button>{{/link-to}}
+  {{#link-to 'testing.index'}}<button>testing/index -> something</button>{{/link-to}}
+  {{#link-to 'testing.foo'}}<button>testing/foo -> bar</button>{{/link-to}}
+  {{#link-to 'bar.cat'}}<button>bar/cat -> testing/foo -> bar</button>{{/link-to}}
+  {{#link-to 'bar.world'}}<button>bar/world -> testing/hello</button>{{/link-to}}
+  {{#link-to 'account' 1 2}}<button>account/1/other/2 -> user/1/something/2</button>{{/link-to}}
+  {{#link-to 'profile' 3 4}}<button>profile/3/user/4 -> user/4/something/3</button>{{/link-to}}
+  {{#link-to 'login'}}<button>login -> foo</button>{{/link-to}}
+</div>
 
 {{outlet}}
