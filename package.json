@@ -1,6 +1,6 @@
 {
   "name": "ember-redirect",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "EmberJS redirect addon for Ember-CLI.",
   "directories": {
     "doc": "doc",
