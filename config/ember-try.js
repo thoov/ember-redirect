@@ -2,6 +2,14 @@
 module.exports = {
   scenarios: [
     {
+      name: 'ember-1-13-1',
+      bower: {
+        dependencies: {
+          'ember': '1.13.1'
+        }
+      }
+    },
+    {
       name: 'default',
       bower: {
         dependencies: { }

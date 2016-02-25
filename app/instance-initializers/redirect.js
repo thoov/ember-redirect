@@ -1,10 +1,11 @@
 import reopenRoute from 'ember-redirect/utils/reopen-route';
+import { lookup } from 'ember-redirect/utils/container';
 
 export default {
   name: 'redirect',
 
-  initialize: function(instance) {
-    let router     = instance.container.lookup('router:main');
+  initialize(instance) {
+    let router     = lookup(instance, 'router:main');
     let routeNames = (router && router.redirects) ? Object.keys(router.redirects) : [];
 
     // The user has specified the redirects on the router object instead of the map function

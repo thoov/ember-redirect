@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import arraySwap from 'ember-redirect/utils/array-swap';
+import { lookup, register } from 'ember-redirect/utils/container';
 
 export default function(routeName, options, instance) {
   let routeContainerKey = `route:${routeName}`;
-  let routeObject       = instance.container.lookup(routeContainerKey);
+  let routeObject       = lookup(instance, routeContainerKey);
 
   if (!routeObject) {
     routeObject = Ember.Route.extend({});
-    instance.registry.register(routeContainerKey, routeObject, { singleton: false });
+    register(instance, routeContainerKey, routeObject, { singleton: false });
   }
 
   Ember.assert(`Could not find a route named: ${routeName}`, routeObject);

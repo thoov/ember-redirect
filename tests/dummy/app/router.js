@@ -22,11 +22,11 @@ Router.map(function() {
   this.route('something');
   this.route('dog');
 
-  this.resource('testing', function() {
+  this.route('testing', { resetNamespace: true }, function() {
     this.route('foo');
     this.route('hello');
 
-    this.resource('bar', function() {
+    this.route('bar', { resetNamespace: true }, function() {
       this.route('cat');
       this.route('world');
     });
