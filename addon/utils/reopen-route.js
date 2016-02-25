@@ -2,8 +2,8 @@ import Ember from 'ember';
 import arraySwap from 'ember-redirect/utils/array-swap';
 
 export default function(routeName, options, instance) {
-  var routeContainerKey = `route:${routeName}`;
-  var routeObject       = instance.container.lookup(routeContainerKey);
+  let routeContainerKey = `route:${routeName}`;
+  let routeObject       = instance.container.lookup(routeContainerKey);
 
   if (!routeObject) {
     routeObject = Ember.Route.extend({});
@@ -13,12 +13,12 @@ export default function(routeName, options, instance) {
   Ember.assert(`Could not find a route named: ${routeName}`, routeObject);
 
   routeObject.reopen({
-    beforeModel: function(transition) {
-      var newDynObject       = {};
-      var thisRouteName      = this.routeName;
-      var routeNames         = this.router.router.recognizer.names;
-      var dynSegsOfNextRoute = routeNames[options.redirect].segments.filter(item => item.name).map(item => item.name);
-      var dynSegsOfThisRoute = routeNames[thisRouteName].segments.filter(item => item.name).map(item => item.name);
+    beforeModel(transition) {
+      let newDynObject       = {};
+      let thisRouteName      = this.routeName;
+      let routeNames         = this.router.router.recognizer.names;
+      let dynSegsOfNextRoute = routeNames[options.redirect].segments.filter(item => item.name).map(item => item.name);
+      let dynSegsOfThisRoute = routeNames[thisRouteName].segments.filter(item => item.name).map(item => item.name);
 
       // Make sure we only try to make a redirect at the most nested
       // route and not a parent resource.
@@ -44,7 +44,7 @@ export default function(routeName, options, instance) {
         this.replaceWith(transition.router.recognizer.generate(options.redirect, newDynObject));
       }
 
-      return this._super.apply(this, arguments);
+      return this._super(...arguments);
     }
   });
 
