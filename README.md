@@ -32,10 +32,10 @@ Router.map(function() {
     this.route('sample'); // will redirect to something
     this.route('something');
 
-    this.resource('testing', function() { // will redirect to something
+    this.route('testing', function() { // will redirect to something
         this.route('foo'); // will redirect to bar
 
-        this.resource('bar', function() {
+        this.route('bar', function() {
             this.route('cat'); // will redirect to testing.foo
         });
     });
@@ -45,9 +45,6 @@ Router.map(function() {
     this.route('account', { path: 'account/:account_id/other/:other_id' }); // will redirect to user
 });
 ```
-
-**Note**: In previous versions you used to be able to define redirects on the actual route/resource definitions like this:
-`this.route('foo', { redirect: 'bar' })`. This has been removed and you will need to move over to the above usage.
 
 ## Dynamic Routes ##
 
@@ -94,7 +91,7 @@ maps to the first segment in user.
 
 * `git clone git@github.com:thoov/ember-redirect.git`
 * `cd ember-redirect`
-* `npm install`
+* `npm i; bower i`
 * `ember t`
   * or `ember s` then visit [localhost tests](http://localhost:4200/tests)
 * Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
