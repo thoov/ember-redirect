@@ -11,8 +11,6 @@ export default function(routeName, options, instance) {
     register(instance, routeContainerKey, routeObject, { singleton: false });
   }
 
-  Ember.assert(`Could not find a route named: ${routeName}`, routeObject);
-
   routeObject.reopen({
     beforeModel(transition) {
       let newDynObject       = {};
