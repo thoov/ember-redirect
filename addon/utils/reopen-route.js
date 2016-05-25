@@ -40,6 +40,9 @@ export default function(routeName, options, instance) {
           }
         });
 
+        // Pass along query params.
+        newDynObject['queryParams'] = transition.queryParams;
+
         this.replaceWith(transition.router.recognizer.generate(options.redirect, newDynObject));
       }
 
