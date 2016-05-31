@@ -6,7 +6,7 @@ var App;
 
 module('Query params will be passed along - Integration', {
   setup: function() {
-    App        = startApp();
+    App = startApp();
   },
   teardown: function() {
     Ember.run(App, App.destroy);
