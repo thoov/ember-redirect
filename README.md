@@ -14,8 +14,9 @@ ember install ember-redirect
 ## Usage ##
 
 ```js
-var Router = Ember.Router.extend({
+const Router = Ember.Router.extend({
   location: config.locationType,
+  rootURL: config.rootURL,
 
   redirects: {
     'sample'        : 'something',
@@ -28,21 +29,21 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-    this.route('bar');
-    this.route('sample'); // will redirect to something
-    this.route('something');
+  this.route('bar');
+  this.route('sample'); // will redirect to something
+  this.route('something');
 
-    this.route('testing', function() { // will redirect to something
-        this.route('foo'); // will redirect to bar
+  this.route('testing', function() { // will redirect to something
+    this.route('foo'); // will redirect to bar
 
-        this.route('bar', function() {
-            this.route('cat'); // will redirect to testing.foo
-        });
+    this.route('bar', function() {
+      this.route('cat'); // will redirect to testing.foo
     });
+  });
 
-    this.route('user', { path: 'user/:user_id/something/:something' });
-    this.route('profile', { path: 'profile/:profile_id/user/:user_id' }); // will redirect to user
-    this.route('account', { path: 'account/:account_id/other/:other_id' }); // will redirect to user
+  this.route('user', { path: 'user/:user_id/something/:something' });
+  this.route('profile', { path: 'profile/:profile_id/user/:user_id' }); // will redirect to user
+  this.route('account', { path: 'account/:account_id/other/:other_id' }); // will redirect to user
 });
 ```
 
@@ -92,7 +93,7 @@ maps to the first segment in user.
 * `git clone git@github.com:thoov/ember-redirect.git`
 * `cd ember-redirect`
 * `npm i; bower i`
-* `ember t`
+* `ember test`
   * or `ember s` then visit [localhost tests](http://localhost:4200/tests)
 * Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
 
