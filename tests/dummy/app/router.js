@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import config from './config/environment';
 
-var Router = Ember.Router.extend({
+const Router = Ember.Router.extend({
   location: config.locationType,
+  rootURL: config.rootURL,
   redirects: {
     'sample'        : 'something',
     'testing.index' : 'something',
@@ -17,7 +18,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('sample');
   this.route('something');
   this.route('dog');
