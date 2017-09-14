@@ -2,6 +2,12 @@ import Ember from 'ember';
 import arraySwap from 'ember-redirect/utils/array-swap';
 import { lookup, register } from 'ember-redirect/utils/container';
 
+function getDynamicSegments(segments) {
+  return segments
+    .filter(item => item.type === 1)
+    .map(item => item.value);
+}
+
 export default function(routeName, options, instance) {
   let routeContainerKey = `route:${routeName}`;
   let routeObject       = lookup(instance, routeContainerKey);
@@ -16,8 +22,8 @@ export default function(routeName, options, instance) {
       let newDynObject       = {};
       let thisRouteName      = this.routeName;
       let routeNames         = this.router.router.recognizer.names;
-      let dynSegsOfNextRoute = routeNames[options.redirect].segments.filter(item => item.name).map(item => item.name);
-      let dynSegsOfThisRoute = routeNames[thisRouteName].segments.filter(item => item.name).map(item => item.name);
+      let dynSegsOfNextRoute = getDynamicSegments(routeNames[options.redirect].segments);
+      let dynSegsOfThisRoute = getDynamicSegments(routeNames[thisRouteName].segments);
 
       // Make sure we only try to make a redirect at the most nested
       // route and not a parent resource.
