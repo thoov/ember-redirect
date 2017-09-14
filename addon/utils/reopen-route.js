@@ -2,10 +2,14 @@ import Ember from 'ember';
 import arraySwap from 'ember-redirect/utils/array-swap';
 import { lookup, register } from 'ember-redirect/utils/container';
 
+/**
+ * - `type` and `value` are in Ember > v2.8
+ * - `name` is in Ember === 2.8
+ */
 function getDynamicSegments(segments) {
   return segments
-    .filter(item => item.type === 1)
-    .map(item => item.value);
+    .filter(item => item.type === 1 || !!item.name)
+    .map(item => item.value || item.name);
 }
 
 export default function(routeName, options, instance) {
