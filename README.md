@@ -88,6 +88,23 @@ redirect to the user route of: `/user/34/something/17`. As you can see there are
 shared dynamic segments so we just perform a 1:1 mapping where the first segment in account
 maps to the first segment in user.
 
+## External Routes ##
+
+External routes are supported in the `redirects` hash. You simply pass the url you want to
+redirect to as a string. The redirect string must resemble a url.
+
+An external redirect should look like:
+
+```js
+redirects: {
+  'external' : 'https://github.com/thoov/ember-redirect'
+}
+
+...
+
+this.route('external');
+```
+
 ## Running tests ##
 
 * `git clone git@github.com:thoov/ember-redirect.git`

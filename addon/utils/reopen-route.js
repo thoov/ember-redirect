@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import arraySwap from 'ember-redirect/utils/array-swap';
 import { lookup, register } from 'ember-redirect/utils/container';
+import { inject as service } from '@ember/service';
 
 /**
  * - `type` and `value` are in Ember > v2.8
@@ -10,6 +11,18 @@ function getDynamicSegments(segments) {
   return segments
     .filter(item => item.type === 1 || !!item.name)
     .map(item => item.value || item.name);
+}
+
+/**
+ * Loosely validate a URL `string`. Stolen from: https://github.com/segmentio/is-url
+ *
+ * @param {String} string
+ * @return {Boolean}
+ */
+function resemblesURL(route) {
+  // eslint-disable-next-line no-useless-escape
+  var matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
+  return matcher.test(route);
 }
 
 export default function(routeName, options, instance) {
@@ -22,12 +35,24 @@ export default function(routeName, options, instance) {
   }
 
   routeObject.reopen({
+    window: service(),
     beforeModel(transition) {
       let newDynObject       = {};
       let thisRouteName      = this.routeName;
       let routeNames         = this.router.router.recognizer.names;
-      let dynSegsOfNextRoute = getDynamicSegments(routeNames[options.redirect].segments);
-      let dynSegsOfThisRoute = getDynamicSegments(routeNames[thisRouteName].segments);
+      let dynSegsOfNextRoute = null;
+      let dynSegsOfThisRoute = null;
+
+      // If the redirect route is not a valid route name in this app AND then redirect
+      // looks like a url, send um that-a-way via location.replace
+      if (!routeNames[options.redirect] && resemblesURL(options.redirect)) {
+        transition.abort();
+        this.get('window').location.assign(options.redirect);
+        return false;
+      }
+
+      dynSegsOfNextRoute = getDynamicSegments(routeNames[options.redirect].segments);
+      dynSegsOfThisRoute = getDynamicSegments(routeNames[thisRouteName].segments);
 
       // Make sure we only try to make a redirect at the most nested
       // route and not a parent resource.

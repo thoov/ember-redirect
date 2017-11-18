@@ -13,7 +13,8 @@ const Router = Ember.Router.extend({
     'account'       : 'user',
     'profile'       : 'user',
     'login'         : 'foo',
-    'generated'     : 'foo'
+    'generated'     : 'foo',
+    'external'      : 'https://github.com/thoov/ember-redirect'
   }
 });
 
@@ -41,6 +42,7 @@ Router.map(function() {
 
   this.route('login');
   this.route('generated');
+  this.route('external');
 });
 
 export default Router;
