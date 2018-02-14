@@ -38,7 +38,7 @@ export default function(routeName, options, instance) {
     beforeModel(transition) {
       let newDynObject       = {};
       let thisRouteName      = this.routeName;
-      let routeNames         = this.router._routerMicrolib.recognizer.names;
+      let routeNames         = this.router._routerMicrolib ? this.router._routerMicrolib.recognizer.names : this.router.router.recognizer.names;
       let dynSegsOfNextRoute = null;
       let dynSegsOfThisRoute = null;
 
