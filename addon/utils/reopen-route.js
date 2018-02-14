@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import arraySwap from 'ember-redirect/utils/array-swap';
 import { lookup, register } from 'ember-redirect/utils/container';
-import { inject as service } from '@ember/service';
+import window from 'ember-window-mock';
 
 /**
  * - `type` and `value` are in Ember > v2.8
@@ -30,16 +30,15 @@ export default function(routeName, options, instance) {
   let routeObject       = lookup(instance, routeContainerKey);
 
   if (!routeObject) {
-    routeObject = Ember.Route.extend({});
+    routeObject = Route.extend({});
     register(instance, routeContainerKey, routeObject, { singleton: false });
   }
 
   routeObject.reopen({
-    window: service(),
     beforeModel(transition) {
       let newDynObject       = {};
       let thisRouteName      = this.routeName;
-      let routeNames         = this.router.router.recognizer.names;
+      let routeNames         = this.router._routerMicrolib ? this.router._routerMicrolib.recognizer.names : this.router.router.recognizer.names;
       let dynSegsOfNextRoute = null;
       let dynSegsOfThisRoute = null;
 
@@ -47,7 +46,7 @@ export default function(routeName, options, instance) {
       // looks like a url, send um that-a-way via location.replace
       if (!routeNames[options.redirect] && resemblesURL(options.redirect)) {
         transition.abort();
-        this.get('window').location.assign(options.redirect);
+        window.location.assign(options.redirect);
         return false;
       }
 

@@ -109,8 +109,8 @@ this.route('external');
 
 * `git clone git@github.com:thoov/ember-redirect.git`
 * `cd ember-redirect`
-* `npm i; bower i`
-* `ember test`
+* `yarn`
+* `ember t`
   * or `ember s` then visit [localhost tests](http://localhost:4200/tests)
 * Tests are also run on [TravisCI](https://travis-ci.org/thoov/ember-redirect)
 
